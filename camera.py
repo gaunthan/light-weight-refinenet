@@ -10,13 +10,17 @@ import sys
 
 cmap = np.load('./utils/cmap.npy')
 has_cuda = torch.cuda.is_available()
-n_classes = 40
+n_classes = 60
 
 mnet = rf_lw152(n_classes, pretrained=True).eval()
 if has_cuda:
     mnet = mnet.cuda()
 
-cap = cv2.VideoCapture(0)
+if len(sys.argv) <= 1:
+    cap = cv2.VideoCapture(0)
+else:
+    cap = cv2.VideoCapture(sys.argv[1])
+
 if not cap.isOpened():
     print("Could not open camera")
     sys.exit(-1)
@@ -38,3 +42,5 @@ while rval:
         break
 
     rval, frame = cap.read()
+
+cap.release()
