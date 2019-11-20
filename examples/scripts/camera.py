@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
+import sys
+sys.path.append('../../')
 from models.resnet import rf_lw50, rf_lw101, rf_lw152
 from utils.helpers import prepare_img
+
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import sys
 
-cmap = np.load('./utils/cmap.npy')
+cmap = np.load('../../utils/cmap.npy')
 has_cuda = torch.cuda.is_available()
 n_classes = 60
 
